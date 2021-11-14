@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
     active: {
-      type: boolean,
+      type: Boolean,
     },
     activateCode: {
       type: String,
