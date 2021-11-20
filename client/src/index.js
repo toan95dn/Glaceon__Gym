@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Match from './match';
+import Home from './home';
+import Profile from './profile';
+import Preference from './preference';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/match" element={<Match/>} />
+      <Route path="/profile" element={<Profile/>} />
+      <Route path="/preference" element={<Preference/>} />
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
