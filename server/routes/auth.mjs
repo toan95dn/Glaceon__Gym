@@ -21,7 +21,7 @@ authRoutes.post(
 );
 
 //Verification
-authRoutes.get("/auth/verify/:activateCode", verifyUser);
+authRoutes.get("/verify/:activateCode", catchAsync(verifyUser));
 
 //Sign in
 authRoutes.post(

@@ -38,7 +38,7 @@ async function sendVerificationEmail(req, res, next) {
     to: req.body.email,
     subject: "Welcome to gym matching app from UCSD!",
     text: "Hello, please confirm your email",
-    html: `http://localhost:3001/auth/signup/${res.locals.activateCode}`,
+    html: `http://localhost:3001/auth/verify/${res.locals.activateCode}`,
   };
 
   await sender.sendMail(mailOptions);
@@ -49,6 +49,7 @@ async function verifyUser(req, res, next) {
   const filter = { activateCode: req.params.activateCode };
   const update = { active: true };
   await User.findOneAndUpdate(filter, update);
+  res.status(200).json({ message: "successfully activated" });
 }
 
 export { createUser, sendVerificationEmail, verifyUser };
