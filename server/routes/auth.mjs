@@ -6,6 +6,7 @@ import { validateSignup, validateSignin } from "../middleware.mjs";
 import {
   createUser,
   sendVerificationEmail,
+  verifyUser,
 } from "../controllers/userController.mjs";
 import catchAsync from "../utils/catchAsync.mjs";
 
@@ -20,6 +21,7 @@ authRoutes.post(
 );
 
 //Verification
+authRoutes.get("/auth/verify/:activateCode", verifyUser);
 
 //Sign in
 authRoutes.post(

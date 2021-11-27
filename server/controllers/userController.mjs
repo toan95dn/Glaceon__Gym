@@ -35,21 +35,20 @@ async function sendVerificationEmail(req, res, next) {
 
   let mailOptions = {
     from: "Glaceon_Team",
-    to: "toan95dn@gmail.com",
+    to: req.body.email,
     subject: "Welcome to gym matching app from UCSD!",
     text: "Hello, please confirm your email",
-    html: `${res.locals.activateCode}`,
+    html: `http://localhost:3001/auth/signup/${res.locals.activateCode}`,
   };
 
-  sender.sendMail(mailOptions, function (err, data) {
-    if (err) {
-      console.log("error sending email", err);
-    } else {
-      console.log("email sent successfully");
-    }
-  });
-
+  await sender.sendMail(mailOptions);
   res.status(200).json({ emailSentTo: res.locals.activateCode });
 }
 
-export { createUser, sendVerificationEmail };
+async function verifyUser(req, res, next) {
+  const filter = { activateCode: req.params.activateCode };
+  const update = { active: true };
+  await User.findOneAndUpdate(filter, update);
+}
+
+export { createUser, sendVerificationEmail, verifyUser };
